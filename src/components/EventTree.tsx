@@ -3,7 +3,7 @@ import React from 'react';
 
 export default () => (
   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-	 width="100%" viewBox="0 0 2048 1474" enable-background="new 0 0 2048 1474">
+	 width="100%" viewBox="0 0 2048 1474" enableBackground="new 0 0 2048 1474">
 <path fill="transparent" opacity="1.000000" stroke="none" 
 	d="
 M2049.000000,714.000000 
