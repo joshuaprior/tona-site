@@ -20419,4 +20419,10 @@ M495.156433,161.213562
 	C495.670776,161.386032 496.290070,161.849014 497.062073,162.565262 
 	C496.563629,162.380386 495.912476,161.942230 495.156433,161.213562 
 z"/>
+ <circle id="anchor-1" cx="240" cy="986" r="10" fill="white" opacity="100"/>
+ <circle id="anchor-2" cx="540" cy="986" r="10" fill="white" opacity="100"/>
+ <circle id="anchor-3" cx="840" cy="986" r="10" fill="white" opacity="100"/>
+ <circle id="anchor-4" cx="1140" cy="986" r="10" fill="white" opacity="100"/>
+ <circle id="anchor-5" cx="1440" cy="986" r="10" fill="white" opacity="100"/>
+ <circle id="anchor-6" cx="1740" cy="986" r="10" fill="white" opacity="100"/>
 </svg>
