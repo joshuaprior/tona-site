@@ -175,6 +175,11 @@ const App: React.FC = () => {
           <MainContent>
             <UpcomingEvents>
               <EventCard />
+              <EventCard />
+              <EventCard />
+              <EventCard />
+              <EventCard />
+              <EventCard />
             </UpcomingEvents>
             <Section>
               <SectionTitle>Get Involved</SectionTitle>

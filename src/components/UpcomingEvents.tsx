@@ -1,7 +1,7 @@
-import React, { ReactNode, useRef, useEffect, useState } from 'react';
+import React, { ReactNode, useRef, useEffect, useState, Children } from 'react';
 import styled from 'styled-components';
 import backgroundImage from '../media/background.jpg';
-import EventTree from './EventTree';
+import EventTree, { AnchorRefs } from './EventTree';
 
 const AspectRatioBox = styled.section`
   position: relative;
@@ -41,7 +41,7 @@ const EventsList = styled.div`
   }
 `;
 
-const CardsContainer = styled.div<{ $top: number; $left: number }>`
+const CardContainer = styled.div<{ $top: number; $left: number }>`
   position: absolute;
   top: ${props => props.$top}px;
   left: ${props => props.$left}px;
@@ -52,32 +52,67 @@ interface UpcomingEventsProps {
   children?: ReactNode;
 }
 
+interface AnchorPosition {
+  top: number;
+  left: number;
+}
+
 const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ children }) => {
-  const anchorRef = useRef<SVGCircleElement>(null);
   const containerRef = useRef<HTMLElement>(null);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const anchorRefs: AnchorRefs = {
+    anchor1: useRef<SVGCircleElement>(null),
+    anchor2: useRef<SVGCircleElement>(null),
+    anchor3: useRef<SVGCircleElement>(null),
+    anchor4: useRef<SVGCircleElement>(null),
+    anchor5: useRef<SVGCircleElement>(null),
+    anchor6: useRef<SVGCircleElement>(null),
+  };
+  const [positions, setPositions] = useState<Record<keyof AnchorRefs, AnchorPosition>>({
+    anchor1: { top: 0, left: 0 },
+    anchor2: { top: 0, left: 0 },
+    anchor3: { top: 0, left: 0 },
+    anchor4: { top: 0, left: 0 },
+    anchor5: { top: 0, left: 0 },
+    anchor6: { top: 0, left: 0 },
+  });
 
   useEffect(() => {
-    const updatePosition = () => {
-      if (anchorRef.current && containerRef.current) {
-        const anchorRect = anchorRef.current.getBoundingClientRect();
+    const updatePositions = () => {
+      if (containerRef.current) {
         const containerRect = containerRef.current.getBoundingClientRect();
-        
-        setPosition({
-          top: anchorRect.top - containerRect.top,
-          left: anchorRect.left - containerRect.left,
+        const newPositions: Record<keyof AnchorRefs, AnchorPosition> = {
+          anchor1: { top: 0, left: 0 },
+          anchor2: { top: 0, left: 0 },
+          anchor3: { top: 0, left: 0 },
+          anchor4: { top: 0, left: 0 },
+          anchor5: { top: 0, left: 0 },
+          anchor6: { top: 0, left: 0 },
+        };
+
+        Object.entries(anchorRefs).forEach(([key, ref]) => {
+          if (ref.current) {
+            const anchorRect = ref.current.getBoundingClientRect();
+            newPositions[key as keyof AnchorRefs] = {
+              top: anchorRect.top - containerRect.top,
+              left: anchorRect.left - containerRect.left,
+            };
+          }
         });
+
+        setPositions(newPositions);
       }
     };
 
-    updatePosition();
-    window.addEventListener('resize', updatePosition);
-    return () => window.removeEventListener('resize', updatePosition);
+    updatePositions();
+    window.addEventListener('resize', updatePositions);
+    return () => window.removeEventListener('resize', updatePositions);
   }, []);
+
+  const childArray = Children.toArray(children).slice(0, 6);
 
   return (
     <AspectRatioBox ref={containerRef}>
-      <EventTree ref={anchorRef} />
+      <EventTree anchorRefs={anchorRefs} />
       <Overlay />
       <ContentContainer>
         <Title>Upcoming Events</Title>
@@ -85,9 +120,24 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ children }) => {
           <p>No upcoming events at the moment.</p>
         </EventsList>
       </ContentContainer>
-      <CardsContainer $top={position.top} $left={position.left}>
-        {children}
-      </CardsContainer>
+      <CardContainer $top={positions.anchor1.top} $left={positions.anchor1.left}>
+        {childArray[0]}
+      </CardContainer>
+      <CardContainer $top={positions.anchor2.top} $left={positions.anchor2.left}>
+        {childArray[1]}
+      </CardContainer>
+      <CardContainer $top={positions.anchor3.top} $left={positions.anchor3.left}>
+        {childArray[2]}
+      </CardContainer>
+      <CardContainer $top={positions.anchor4.top} $left={positions.anchor4.left}>
+        {childArray[3]}
+      </CardContainer>
+      <CardContainer $top={positions.anchor5.top} $left={positions.anchor5.left}>
+        {childArray[4]}
+      </CardContainer>
+      <CardContainer $top={positions.anchor6.top} $left={positions.anchor6.left}>
+        {childArray[5]}
+      </CardContainer>
     </AspectRatioBox>
   );
 };
