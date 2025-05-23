@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import backgroundImage from '../media/background.jpg';
-import treeImage from '../media/event-tree.svg';
+import EventTree from './EventTree';
 
 const AspectRatioBox = styled.section`
   position: relative;
@@ -9,15 +9,6 @@ const AspectRatioBox = styled.section`
   aspect-ratio: 2048 / 1474;
   background: url(${backgroundImage}) center/cover no-repeat;
   overflow: hidden;
-`;
-
-const TreeImage = styled.img`
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: contain;
-  z-index: 1;
-  pointer-events: none;
-  user-select: none;
 `;
 
 const Overlay = styled.div`
@@ -53,7 +44,7 @@ const EventsList = styled.div`
 const UpcomingEvents: React.FC = () => {
   return (
     <AspectRatioBox>
-      <TreeImage src={treeImage} alt="" aria-hidden="true" />
+      <EventTree />
       <Overlay />
       <ContentContainer>
         <Title>Upcoming Events</Title>
