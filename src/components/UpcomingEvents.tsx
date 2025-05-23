@@ -11,36 +11,6 @@ const AspectRatioBox = styled.section`
   overflow: hidden;
 `;
 
-const Overlay = styled.div`
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.3);
-  z-index: 2;
-`;
-
-const ContentContainer = styled.div`
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: white;
-  padding: 1.5rem;
-`;
-
-const Title = styled.h2`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`;
-
-const EventsList = styled.div`
-  & > * + * {
-    margin-top: 1rem;
-  }
-`;
-
 const CardContainer = styled.div<{ $top: number; $left: number }>`
   position: absolute;
   top: ${props => props.$top}px;
@@ -113,13 +83,6 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ children }) => {
   return (
     <AspectRatioBox ref={containerRef}>
       <EventTree anchorRefs={anchorRefs} />
-      <Overlay />
-      <ContentContainer>
-        <Title>Upcoming Events</Title>
-        <EventsList>
-          <p>No upcoming events at the moment.</p>
-        </EventsList>
-      </ContentContainer>
       <CardContainer $top={positions.anchor1.top} $left={positions.anchor1.left}>
         {childArray[0]}
       </CardContainer>
