@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import UpcomingEvents from './components/UpcomingEvents';
+import EventCard from './components/EventCard';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -29,7 +30,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const AppContainer = styled.div`
+  width: 100%;
   min-height: 100vh;
+  background-color: #f5f5f5;
 `;
 
 const Header = styled.header`
@@ -170,7 +173,9 @@ const App: React.FC = () => {
 
         <Main>
           <MainContent>
-            <UpcomingEvents />
+            <UpcomingEvents>
+              <EventCard />
+            </UpcomingEvents>
             <Section>
               <SectionTitle>Get Involved</SectionTitle>
               <SectionText>Ways to help our community thrive:</SectionText>

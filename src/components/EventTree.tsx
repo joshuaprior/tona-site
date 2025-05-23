@@ -1,9 +1,10 @@
 //<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-import React from 'react';
+import React, { forwardRef } from 'react';
 
-export default () => (
+export default forwardRef<SVGCircleElement>((_, ref) => (
   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
 	 width="100%" viewBox="0 0 2048 1474" enableBackground="new 0 0 2048 1474">
+		<g>
 <path fill="transparent" opacity="1.000000" stroke="none" 
 	d="
 M2049.000000,714.000000 
@@ -20423,11 +20424,12 @@ M495.156433,161.213562
 	C495.670776,161.386032 496.290070,161.849014 497.062073,162.565262 
 	C496.563629,162.380386 495.912476,161.942230 495.156433,161.213562 
 z"/>
+</g>
  <circle id="anchor-1" cx="240" cy="986" r="10" fill="white" opacity="100"/>
  <circle id="anchor-2" cx="540" cy="986" r="10" fill="white" opacity="100"/>
  <circle id="anchor-3" cx="840" cy="986" r="10" fill="white" opacity="100"/>
  <circle id="anchor-4" cx="1140" cy="986" r="10" fill="white" opacity="100"/>
  <circle id="anchor-5" cx="1440" cy="986" r="10" fill="white" opacity="100"/>
- <circle id="anchor-6" cx="1740" cy="986" r="10" fill="white" opacity="100"/>
+ <circle ref={ref} id="anchor-6" cx="1740" cy="986" r="10" fill="white" opacity="100"/>
 </svg>
-);
+));

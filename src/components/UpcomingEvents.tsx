@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import backgroundImage from '../media/background.jpg';
 import EventTree from './EventTree';
@@ -41,18 +41,53 @@ const EventsList = styled.div`
   }
 `;
 
-const UpcomingEvents: React.FC = () => {
+const CardsContainer = styled.div<{ $top: number; $left: number }>`
+  position: absolute;
+  top: ${props => props.$top}px;
+  left: ${props => props.$left}px;
+  z-index: 4;
+`;
+
+interface UpcomingEventsProps {
+  children?: ReactNode;
+}
+
+const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ children }) => {
+  const anchorRef = useRef<SVGCircleElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  useEffect(() => {
+    const updatePosition = () => {
+      if (anchorRef.current && containerRef.current) {
+        const anchorRect = anchorRef.current.getBoundingClientRect();
+        const containerRect = containerRef.current.getBoundingClientRect();
+        
+        setPosition({
+          top: anchorRect.top - containerRect.top,
+          left: anchorRect.left - containerRect.left,
+        });
+      }
+    };
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    return () => window.removeEventListener('resize', updatePosition);
+  }, []);
+
   return (
-    <AspectRatioBox>
-      <EventTree />
+    <AspectRatioBox ref={containerRef}>
+      <EventTree ref={anchorRef} />
       <Overlay />
       <ContentContainer>
         <Title>Upcoming Events</Title>
         <EventsList>
-          {/* Event content will go here */}
           <p>No upcoming events at the moment.</p>
         </EventsList>
       </ContentContainer>
+      <CardsContainer $top={position.top} $left={position.left}>
+        {children}
+      </CardsContainer>
     </AspectRatioBox>
   );
 };
