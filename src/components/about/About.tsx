@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import tonaTreeImage from '../../media/tona-tree.PNG';
 import BoardMember from './BoardMember';
+import fetchPath from '../../util/fetchPath';
 
 interface BoardMember {
   image?: string;
@@ -88,7 +89,7 @@ const About: React.FC = () => {
   useEffect(() => {
     const fetchBoardMembers = async () => {
       try {
-        const response = await fetch('/config/board/board.json');
+        const response = await fetch(fetchPath('/config/board/board.json'));
         if (!response.ok) {
           throw new Error('Failed to fetch board members');
         }
@@ -131,7 +132,7 @@ const About: React.FC = () => {
           {boardMembers.map((member, index) => (
             <BoardMember
               key={index}
-              image={`/config/board/${member.image}`}
+              image={fetchPath(`/config/board/${member.image}`)}
               name={member.name}
               title={member.title}
             />
