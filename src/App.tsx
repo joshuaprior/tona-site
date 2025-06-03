@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import Nav from './components/nav/Nav';
+import Home from './components/home/Home';
+import About from './components/about/About';
+import Documents from './components/documents/Documents';
 import UpcomingEvents from './components/UpcomingEvents';
 import EventCard from './components/EventCard';
-import Nav from './components/nav/Nav';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -125,33 +128,36 @@ const FooterText = styled.p`
 `;
 
 const App: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'documents'>('home');
+
+  const handleNavigation = ({ page }: { page: 'home' | 'about' | 'documents' }) => {
+    setCurrentPage(page);
+  };
+
+  const renderPageContent = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Home />;
+      case 'about':
+        return <About />;
+      case 'documents':
+        return <Documents />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
       <AppContainer>
         <Header>
-          <Nav />
+          <Nav onNavigation={handleNavigation} />
         </Header>
 
         <Main>
           <MainContent>
-            <UpcomingEvents>
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-            </UpcomingEvents>
-            <Section>
-              <SectionTitle>Get Involved</SectionTitle>
-              <SectionText>Ways to help our community thrive:</SectionText>
-              <List>
-                <ListItem>• Community clean-up days</ListItem>
-                <ListItem>• Neighborhood watch program</ListItem>
-                <ListItem>• Community garden maintenance</ListItem>
-              </List>
-            </Section>
+            {renderPageContent()}
           </MainContent>
         </Main>
 
