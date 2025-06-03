@@ -47,13 +47,16 @@ const Home: React.FC = () => {
         <EventCard />
       </UpcomingEvents>
       <Section>
-        <SectionTitle>Get Involved</SectionTitle>
-        <SectionText>Ways to help our community thrive:</SectionText>
-        <List>
-          <ListItem>• Community clean-up days</ListItem>
-          <ListItem>• Neighborhood watch program</ListItem>
-          <ListItem>• Community garden maintenance</ListItem>
-        </List>
+        <SectionTitle>Committees</SectionTitle>
+        <SectionText>Committies help support and grow our community.</SectionText>
+        <SectionText>{'<Grab some content from the TONA Community Events Team Needs you! on the Committees page>'}</SectionText>
+        <SectionText>{'<Grab some content from the More -> Get Involved page>'}</SectionText>
+        <SectionText>{'<Committees represented as the root system of the tree>'}</SectionText>
+      </Section>
+      <Section>
+        <SectionTitle>Community Tasks</SectionTitle>
+        <SectionText>Get involved with low commitment tasks:</SectionText>
+        {'<List of small jobs that TONA needs help with: pulling weeds, getting plates or cups for events, etc.>'}
       </Section>
     </>
   );
