@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import logoImage from '../../media/tona-tree.PNG';
 
 const NavContainer = styled.nav`
   position: fixed;
@@ -33,6 +34,12 @@ const NavContent = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 0.75rem;
+`;
+
+const LogoImage = styled.img`
+  height: 2.5rem;
+  width: auto;
 `;
 
 const LogoText = styled.h1`
@@ -46,7 +53,8 @@ const Nav: React.FC = () => {
     <NavContainer>
       <NavContent>
         <LogoContainer>
-          <LogoText>Thousand Oaks Community</LogoText>
+          <LogoImage src={logoImage} alt="TONA Logo" />
+          <LogoText>TONA</LogoText>
         </LogoContainer>
       </NavContent>
     </NavContainer>
