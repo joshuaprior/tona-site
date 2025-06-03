@@ -128,7 +128,7 @@ const FooterText = styled.p`
 `;
 
 const App: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'documents'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'documents'>('about');
 
   const handleNavigation = ({ page }: { page: 'home' | 'about' | 'documents' }) => {
     setCurrentPage(page);
