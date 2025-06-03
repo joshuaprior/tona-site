@@ -34,9 +34,12 @@ const Documents: React.FC = () => {
     <Section>
       <SectionTitle>Important Documents</SectionTitle>
       <List>
-        <ListItem>• Bylaws</ListItem>
-        <ListItem>• Meeting Minutes</ListItem>
-        <ListItem>• Community Guidelines</ListItem>
+        <ListItem>• TONA Bylaws</ListItem>
+        <ListItem>• 1985 Thousand Oaks Master Plan Report</ListItem>
+        <ListItem>• Thousand Oaks Park Tree Management Plan</ListItem>
+        <ListItem>• TONA Tree Image (to use in swag)</ListItem>
+        <ListItem>• Other PDFs?</ListItem>
+        <ListItem>• Meetings (recordings, transcripts, summaries)</ListItem>
       </List>
     </Section>
   );
