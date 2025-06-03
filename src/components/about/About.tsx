@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import tonaTreeImage from '../../media/tona-tree.PNG';
+import BoardMember from './BoardMember';
+
+interface BoardMember {
+  image?: string;
+  name: string;
+  title: string;
+}
 
 const Section = styled.section`
   background-color: white;
@@ -54,7 +61,49 @@ const Divider = styled.hr`
   margin: 2rem 0;
 `;
 
+const BoardMembersGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+`;
+
+const LoadingText = styled.p`
+  color: #6b7280;
+  text-align: center;
+  margin: 2rem 0;
+`;
+
+const ErrorText = styled.p`
+  color: #dc2626;
+  text-align: center;
+  margin: 2rem 0;
+`;
+
 const About: React.FC = () => {
+  const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBoardMembers = async () => {
+      try {
+        const response = await fetch('/config/board/board.json');
+        if (!response.ok) {
+          throw new Error('Failed to fetch board members');
+        }
+        const data = await response.json();
+        setBoardMembers(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBoardMembers();
+  }, []);
+
   return (
     <Section>
       <SectionTitle>Thousand Oaks Neighborhood Association, San Jose, CA</SectionTitle>
@@ -67,10 +116,28 @@ const About: React.FC = () => {
 
       <Divider />
 
-      <SectionTitle>Our Mission</SectionTitle>
+      <SectionTitle>Board Members</SectionTitle>
+
       <SectionText>
         Our Neighborhood Association is dedicated to keeping the residents well informed about neighborhood activities/news, community events and July 4th parade through this website, our newsletter, and our private Facebook group.
       </SectionText>
+
+      {isLoading ? (
+        <LoadingText>Loading board members...</LoadingText>
+      ) : error ? (
+        <ErrorText>{error}</ErrorText>
+      ) : (
+        <BoardMembersGrid>
+          {boardMembers.map((member, index) => (
+            <BoardMember
+              key={index}
+              image={`/config/board/${member.image}`}
+              name={member.name}
+              title={member.title}
+            />
+          ))}
+        </BoardMembersGrid>
+      )}
     </Section>
   );
 };
