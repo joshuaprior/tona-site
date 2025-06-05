@@ -42,6 +42,7 @@ const AppContainer = styled.div`
 const Header = styled.header`
   position: relative;
   background-color: white;
+  height: 4rem;
 `;
 
 const Main = styled.main`
