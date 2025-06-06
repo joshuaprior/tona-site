@@ -38,8 +38,10 @@ const TwoColumnText = styled.div`
   line-height: 1.6;
   position: relative;
 
-  p:first-child {
+  p {
     margin-top: 0;
+    position: relative; /* Ensure text is in its own stacking context */
+    z-index: 1; /* Ensure text is above the background image */
   }
 `;
 
@@ -48,11 +50,10 @@ const CenteredImage = styled.img`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 308px;
-  height: auto;
-  shape-outside: url(${tonaTreeImage});
-  shape-image-threshold: 0.5;
-  shape-margin: 1rem;
+  height: 90%;
+  max-width: 90%;
+  object-fit: cover;
+  opacity: 0.1;
 `;
 
 const Divider = styled.hr`
@@ -109,10 +110,10 @@ const About: React.FC = () => {
     <Section>
       <SectionTitle>Thousand Oaks Neighborhood Association, San Jose, CA</SectionTitle>
       <TwoColumnText>
+        <CenteredImage src={tonaTreeImage} alt="TONA Tree" />
         <p>Nestled in the heart of Silicon Valley, the Thousand Oaks neighborhood is one of the most beautiful and peaceful residential areas in San Jose. Conveniently located near shopping, freeway access, and schools, Thousand Oaks is neatly tucked-in in such a way that allows for neighbors to really interact with and get to know each other.</p>
         <p>The anchor point for the neighborhood is Thousand Oaks Park, which covers approximately 9.1 acres of land. This is where the community gathers for the popular Fourth Of July Parade and Picnic, Easter Egg Hunt, National Night Out, and other community events. This park is has a popular playground, nature area, walking paths and lawns for enjoying the outdoors. A new extension of Thousand Oaks Park located across the street is a beautiful Woodland Area with a walking path and benches to rest on.</p>
         <p>Terrell Park, which covers approximately 5.7 acres of land is adjacent to Terrell Elementary School which serves children from Kindergarten through Fifth Grade. Terrell has a picnic area with BBQs available for gatherings. The playground at Terrell Park is focused more towards our younger children and is a popular spot for the little ones.</p>
-        <CenteredImage src={tonaTreeImage} alt="TONA Tree" />
       </TwoColumnText>
 
       <Divider />
