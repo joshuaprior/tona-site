@@ -5,6 +5,7 @@ import Home from './components/home/Home';
 import About from './components/about/About';
 import Documents from './components/documents/Documents';
 import UpcomingEvents from './components/UpcomingEvents';
+import Hero from './components/home/Hero'; // Import the Hero component
 import EventCard from './components/EventCard';
 
 const GlobalStyle = createGlobalStyle`
@@ -42,7 +43,7 @@ const AppContainer = styled.div`
 const Header = styled.header`
   position: relative;
   background-color: white;
-  height: 4rem;
+  height: 50rem;
 `;
 
 const Main = styled.main`
@@ -154,6 +155,7 @@ const App: React.FC = () => {
       <AppContainer>
         <Header>
           <Nav onNavigation={handleNavigation} />
+          {currentPage === 'home' && <Hero />}
         </Header>
 
         <Main>
