@@ -15,9 +15,8 @@ const HeaderBackground = styled.div`
   top: 0;
   width: 100%;
   height: var(--nav-header-height);
-  background-color: var(--nav-header-background-color);
+  background-color: var(--shell-background-color);
   z-index: 1;
-  /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); */
 `;
 
 const NavContent = styled.div`
@@ -57,7 +56,7 @@ const LogoImage = styled.img`
 const LogoText = styled.h1`
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: var(--shell-color);
 `;
 
 const NavLinks = styled.div`
@@ -68,7 +67,7 @@ const NavLinks = styled.div`
 `;
 
 const NavLink = styled.a`
-  color: white;
+  color: var(--shell-color);
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;

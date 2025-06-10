@@ -31,7 +31,7 @@ interface OverlayPathProps {
 
 
 const OverlayPath = styled.path<OverlayPathProps>`
-  fill: var(--nav-header-background-color);
+  fill: var(--shell-background-color);
   ${({ scale }) => scale === 100 ? '' : `
     transform-origin: bottom;
     transform: scale(1, ${scale / 100});

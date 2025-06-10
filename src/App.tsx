@@ -11,7 +11,8 @@ import EventCard from './components/EventCard';
 const GlobalStyle = createGlobalStyle`
   body {
     --nav-header-height: 4rem;
-    --nav-header-background-color: #2b4a2d;
+    --shell-color: white;
+    --shell-background-color: #2b4a2d;
   }
 
   body {
@@ -103,7 +104,7 @@ const ListItem = styled.li`
 `;
 
 const Footer = styled.footer`
-  background-color: white;
+  background-color: var(--shell-background-color);
   box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
   margin-top: 2rem;
 `;
@@ -125,7 +126,7 @@ const FooterContent = styled.div`
 
 const FooterText = styled.p`
   text-align: center;
-  color: #6b7280;
+  color: var(--shell-color);
 `;
 
 const App: React.FC = () => {
