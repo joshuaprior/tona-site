@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
+import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -28,9 +29,9 @@ const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%; /* Fill the HeaderContainer's height */
-  position: relative; /* To establish a stacking context for z-index */
-  z-index: 2; /* Ensure NavContent is above BottomFill */
+  height: 100%;
+  position: relative;
+  z-index: 2;
   @media (min-width: 640px) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -39,6 +40,29 @@ const NavContent = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
+`;
+
+const HeaderLeftGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  /* This group will be on the left due to NavContent's justify-content: space-between */
+`;
+
+const ContactUsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const IconLink = styled.a`
+  display: inline-block;
+  line-height: 0;
+`;
+
+const ContactIcon = styled.img`
+  height: 2rem;
+  width: auto;
+  filter: brightness(0) invert(1); 
 `;
 
 const LogoContainer = styled.div`
@@ -96,18 +120,24 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
   return (
     <>
       <HeaderContainer>
-          <NavContent>
+        <NavContent>
+          <HeaderLeftGroup>
             <LogoContainer>
               <LogoImage src={logoImage} alt="TONA Logo" />
               <LogoText>TONA</LogoText>
             </LogoContainer>
-            
-            <NavLinks>
-              <NavLink href="#" onClick={(e) => handleClick(e, 'home')}>Home</NavLink>
-              <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
-              <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
-            </NavLinks>
-          </NavContent>
+            <ContactUsContainer>
+              <IconLink href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">
+                <ContactIcon src={facebookIcon} alt="Facebook" />
+              </IconLink>
+            </ContactUsContainer>
+          </HeaderLeftGroup>
+          <NavLinks>
+            <NavLink href="#" onClick={(e) => handleClick(e, 'home')}>Home</NavLink>
+            <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
+            <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
+          </NavLinks>
+        </NavContent>
       </HeaderContainer>
       {children}
       <HeaderBackground />
