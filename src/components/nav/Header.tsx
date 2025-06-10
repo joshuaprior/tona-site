@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
+import emailIcon from '../../media/email.svg'; // Import the Email icon
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -52,6 +53,7 @@ const HeaderLeftGroup = styled.div`
 const ContactUsContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 0.75rem; /* Add some space between icons */
 `;
 
 const IconLink = styled.a`
@@ -129,6 +131,9 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
             <ContactUsContainer>
               <IconLink href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">
                 <ContactIcon src={facebookIcon} alt="Facebook" />
+              </IconLink>
+              <IconLink href="mailto:tona.sanjose@gmail.com" aria-label="Send us an email">
+                <ContactIcon src={emailIcon} alt="Email" />
               </IconLink>
             </ContactUsContainer>
           </HeaderLeftGroup>
