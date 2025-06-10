@@ -80,6 +80,14 @@ const LogoContainer = styled.div`
   align-items: center;
   gap: 0.75rem;
   flex: 1;
+
+  @media (max-width: ${BREAK_POINTS.MOBILE}) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    flex: none; /* Override desktop flex behavior */
+  }
 `;
 
 const LogoImage = styled.img`
