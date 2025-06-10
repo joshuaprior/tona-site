@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
@@ -118,6 +118,28 @@ const NavLink = styled.a`
   cursor: pointer;
 `;
 
+interface DrawerContainerProps {
+  isOpen: boolean;
+}
+
+const DrawerContainer = styled.div<DrawerContainerProps>`
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: var(--nav-header-height); /* Start below the header */
+  left: ${({ isOpen }) => isOpen ? '0' : '-250px'}; /* Control position based on isOpen */
+  width: 250px; 
+  height: calc(100vh - var(--nav-header-height)); /* Fill remaining viewport height */
+  background-color: var(--shell-background-color);
+  padding: 1rem;
+  z-index: 999; /* Below HeaderContainer (1000) but above most other content */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Optional: add a subtle shadow, adjusted for left side */
+  transition: left 0.3s ease-in-out; /* Animate the left property */
+
+  @media (max-width: 768px) { /* Show on mobile devices */
+    display: block; /* Or 'flex' if you need to align children directly */
+  }
+`;
+
 const RightSection = styled.div`
   flex: 1;
   display: flex;
@@ -131,9 +153,14 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'about' | 'documents') => {
     e.preventDefault();
     onNavigation({ page });
+    if (isDrawerOpen) {
+      setIsDrawerOpen(false); // Close drawer on navigation
+    }
   };
 
   return (
@@ -141,7 +168,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
       <HeaderContainer>
         <NavContent>
           <HeaderLeftGroup>
-            <HamburgerIcon src={hamburgerIcon} alt="Menu" />
+            <HamburgerIcon src={hamburgerIcon} alt="Menu" onClick={() => setIsDrawerOpen(!isDrawerOpen)} />
             <LogoContainer>
               <LogoImage src={logoImage} alt="TONA Logo" />
               <LogoText>TONA</LogoText>
@@ -164,6 +191,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
       </HeaderContainer>
       {children}
       <HeaderBackground />
+      <DrawerContainer isOpen={isDrawerOpen} />
     </>
   );
 };
