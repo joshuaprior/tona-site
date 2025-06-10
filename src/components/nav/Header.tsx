@@ -57,6 +57,10 @@ const ContactUsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem; /* Add some space between icons */
+
+  @media (max-width: ${BREAK_POINTS.MOBILE}) {
+    display: none;
+  }
 `;
 
 const HamburgerIcon = styled.img`
@@ -126,6 +130,11 @@ const DrawerContainer = styled.div<DrawerContainerProps>`
   }
 `;
 
+const DrawerContactUsContainer = styled.div`
+  display: flex; /* To align items if needed, e.g., for multiple rows of contact info */
+  gap: 0.75rem; /* Consistent with ContactUsContainer */
+`;
+
 const RightSection = styled.div`
   flex: 1;
   display: flex;
@@ -172,6 +181,9 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
       <HeaderBackground />
       <DrawerContainer isOpen={isDrawerOpen}>
         <NavLinks onLinkClick={handleClick} />
+        <DrawerContactUsContainer>
+          <ContactUsLinks />
+        </DrawerContactUsContainer>
       </DrawerContainer>
     </>
   );
