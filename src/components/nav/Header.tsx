@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
 import emailIcon from '../../media/email.svg'; // Import the Email icon
+import hamburgerIcon from '../../media/hamburger.svg'; // Import the Hamburger icon
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -67,6 +68,18 @@ const ContactIcon = styled.img`
   filter: brightness(0) invert(1); 
 `;
 
+const HamburgerIcon = styled.img`
+  display: none; /* Hidden by default */
+  height: 1.5rem; /* Adjust size as needed */
+  width: auto;
+  filter: brightness(0) invert(1); /* Assuming you want it white like other icons */
+  cursor: pointer; /* Indicate it will be clickable later */
+
+  @media (max-width: 768px) { /* Show on mobile devices */
+    display: block;
+  }
+`;
+
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
@@ -90,6 +103,10 @@ const NavLinks = styled.div`
   gap: 2rem;
   justify-content: end;
   flex: 2;
+
+  @media (max-width: 768px) { /* Hide on mobile devices */
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`
@@ -124,6 +141,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
       <HeaderContainer>
         <NavContent>
           <HeaderLeftGroup>
+            <HamburgerIcon src={hamburgerIcon} alt="Menu" />
             <LogoContainer>
               <LogoImage src={logoImage} alt="TONA Logo" />
               <LogoText>TONA</LogoText>
