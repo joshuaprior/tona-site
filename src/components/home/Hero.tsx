@@ -41,9 +41,9 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
   const [videoOffset, setVideoOffset] = useState(0);
-  const [svgScale, setSvgScale] = useState(100); // Initial scale 0%
+  const [svgScale, setSvgScale] = useState(100);
   const heroContainerRef = useRef<HTMLDivElement>(null);
-  const heroContainerHeightRef = useRef<number>(0); // To store HeroContainer's height
+  const heroContainerHeightRef = useRef<number>(0);
 
   const handleScroll = useCallback(() => {
     const scrollY = window.scrollY;
@@ -55,7 +55,7 @@ const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
 
     // SVG scale logic
     if (heroHeight > 0) {
-      const scrollPercentage = (scrollY / heroHeight) * 100;
+      const scrollPercentage = (scrollY / heroHeight) * 100 * 1.2;
       const newScale = 100 - Math.max(0, Math.min(100, scrollPercentage));
       setSvgScale(newScale);
     } else {
