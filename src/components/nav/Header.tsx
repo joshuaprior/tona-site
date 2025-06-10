@@ -85,9 +85,10 @@ const RightSection = styled.div`
 interface HeaderProps {
   onNavigation: (page: { page: 'home' | 'about' | 'documents' }) => void;
   background?: boolean;
+  children?: React.ReactNode;
 }
 
-const Header: React.FC<HeaderProps> = ({ onNavigation, background }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'about' | 'documents') => {
     e.preventDefault();
     onNavigation({ page });
@@ -109,6 +110,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background }) => {
             </NavLinks>
           </NavContent>
       </HeaderContainer>
+      {children}
       <HeaderBackground />
     </>
   );

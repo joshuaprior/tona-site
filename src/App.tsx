@@ -152,14 +152,11 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <AppContainer>
-        <Header onNavigation={handleNavigation} background={currentPage === 'home' ? !isHeroInView : true} />
-        {/*
-        <Header>
+        <Header onNavigation={handleNavigation} background={currentPage === 'home' ? !isHeroInView : true}>
           {currentPage === 'home' && (
             <Hero onViewChange={(inView) => setIsHeroInView(inView)} />
           )}
         </Header>
-        */}
 
         <Main>
           <MainContent>

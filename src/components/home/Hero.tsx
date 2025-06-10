@@ -3,26 +3,15 @@ import styled from 'styled-components';
 import heroVideo from '../../media/branch.mp4'; // Import the video
 
 const HeroContainer = styled.div`
-  width: 100%;
-  height: 100%; /* Take full height of parent (Header) */
-  background-color: #e0e0e0; /* Placeholder background color */
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  flex-direction: column;
-  color: #333;
-  overflow: hidden; /* Ensures video doesn't spill out if aspect ratio differs */
-  /* border-radius: 0.5rem; */ /* Optional: if you want rounded corners */
-  /* margin-bottom: 1.5rem; */ /* Optional: space below the hero */
+  position: relative;
+  overflow: hidden; /* Ensures video doesn't spill out as it slides down during scrolling. */
 `;
 
 const VideoElement = styled.video`
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures the video covers the container, cropping if necessary */
-  position: relative; /* Allows the video to be moved within the container */
-  /* Transition for smoother movement - optional */
-  /* transition: transform 0.1s ease-out; */
+  object-fit: cover;
+  position: relative;
 `;
 
 interface OverlaySVGProps {
@@ -31,13 +20,13 @@ interface OverlaySVGProps {
 
 const OverlaySVG = styled.svg<OverlaySVGProps>`
   position: absolute;
-  bottom: 3.9375rem; /* 63px @ 16px/rem */
+  bottom: -1px;
   left: 0;
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  z-index: 2; /* Ensure it's above the video and potentially other overlays */
-  transform-origin: bottom; /* Ensures scaling happens from the bottom */
-  transform: scale(1, ${({ scale }) => scale / 100}); /* Apply vertical scale */
+  height: auto;
+  z-index: 2;
+  transform-origin: bottom;
+  transform: scale(1, ${({ scale }) => scale / 100});
 `;
 
 interface HeroProps {
