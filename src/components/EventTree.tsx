@@ -39,7 +39,7 @@ const EventTree: React.FC<EventTreeProps> = ({ anchorRefs }) => {
         y="0px"
         width="100%"
         viewBox="0 0 2048 1474"
-        enable-background="new 0 0 2048 1474"
+        enableBackground="new 0 0 2048 1474"
       >
         <EventTreeImage />
         <circle ref={anchorRefs.anchor1} id="anchor-1" cx="240" cy="986" r="10" fill="white" opacity="100"/>

@@ -131,6 +131,7 @@ const FooterText = styled.p`
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'documents'>('home');
+  const [isHeroInView, setIsHeroInView] = useState(true);
 
   const handleNavigation = ({ page }: { page: 'home' | 'about' | 'documents' }) => {
     setCurrentPage(page);
@@ -153,9 +154,11 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <AppContainer>
+        <Nav onNavigation={handleNavigation} background={currentPage === 'home' ? !isHeroInView : true} />
         <Header>
-          <Nav onNavigation={handleNavigation} />
-          {currentPage === 'home' && <Hero />}
+          {currentPage === 'home' && (
+            <Hero onViewChange={(inView) => setIsHeroInView(inView)} />
+          )}
         </Header>
 
         <Main>

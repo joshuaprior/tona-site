@@ -2,14 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 
-const NavContainer = styled.nav`
+interface NavContainerProps {
+  background?: boolean;
+}
+
+const NavContainer = styled.nav<NavContainerProps>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: white;
+  background-color: ${({ background }) => background ? '#2b4a2d' : 'transparent'};
   z-index: 1000;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); */
 `;
 
 const NavContent = styled.div`
@@ -47,27 +51,23 @@ const LogoImage = styled.img`
 const LogoText = styled.h1`
   font-size: 1.5rem;
   font-weight: bold;
-  color: #111827;
+  color: white;
 `;
 
 const NavLinks = styled.div`
   display: flex;
   gap: 2rem;
-  justify-content: center;
+  justify-content: end;
   flex: 2;
 `;
 
 const NavLink = styled.a`
-  color: #4b5563;
+  color: white;
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
   transition: color 0.2s ease-in-out;
   cursor: pointer;
-
-  &:hover {
-    color: #111827;
-  }
 `;
 
 const RightSection = styled.div`
@@ -78,16 +78,17 @@ const RightSection = styled.div`
 
 interface NavProps {
   onNavigation: (page: { page: 'home' | 'about' | 'documents' }) => void;
+  background?: boolean;
 }
 
-const Nav: React.FC<NavProps> = ({ onNavigation }) => {
+const Nav: React.FC<NavProps> = ({ onNavigation, background }) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'about' | 'documents') => {
     e.preventDefault();
     onNavigation({ page });
   };
 
   return (
-    <NavContainer>
+    <NavContainer background={background}>
       <NavContent>
         <LogoContainer>
           <LogoImage src={logoImage} alt="TONA Logo" />
@@ -99,10 +100,6 @@ const Nav: React.FC<NavProps> = ({ onNavigation }) => {
           <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
           <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
         </NavLinks>
-
-        <RightSection>
-          {/* This section can be used for additional elements like a search bar, login button, etc. */}
-        </RightSection>
       </NavContent>
     </NavContainer>
   );
