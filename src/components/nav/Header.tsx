@@ -5,7 +5,7 @@ import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
 import emailIcon from '../../media/email.svg'; // Import the Email icon
 import hamburgerIcon from '../../media/hamburger.svg'; // Import the Hamburger icon
 import BREAK_POINTS from '../../constants/break-points';
-import Links from './Links'; // Import the new Links component
+import NavLinks from './NavLinks'; // Updated import name
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -100,7 +100,7 @@ const LogoText = styled.h1`
   color: var(--shell-color);
 `;
 
-const NavLinks = styled.div`
+const NavLinksContainer = styled.div`
   display: flex;
   gap: 2rem;
   justify-content: end;
@@ -179,15 +179,15 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
               </IconLink>
             </ContactUsContainer>
           </HeaderLeftGroup>
-          <NavLinks>
-            <Links onLinkClick={handleClick} />
-          </NavLinks>
+          <NavLinksContainer>
+            <NavLinks onLinkClick={handleClick} />
+          </NavLinksContainer>
         </NavContent>
       </HeaderContainer>
       {children}
       <HeaderBackground />
       <DrawerContainer isOpen={isDrawerOpen}>
-        <Links onLinkClick={handleClick} />
+        <NavLinks onLinkClick={handleClick} />
       </DrawerContainer>
     </>
   );

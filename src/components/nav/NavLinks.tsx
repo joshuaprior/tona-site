@@ -11,11 +11,11 @@ export const NavLink = styled.a`
   cursor: pointer;
 `;
 
-interface LinksProps {
+interface NavLinksProps {
   onLinkClick: (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'about' | 'documents') => void;
 }
 
-const Links: React.FC<LinksProps> = ({ onLinkClick }) => {
+const NavLinks: React.FC<NavLinksProps> = ({ onLinkClick }) => {
   return (
     <>
       <NavLink href="#" onClick={(e) => onLinkClick(e, 'home')}>Home</NavLink>
@@ -25,4 +25,4 @@ const Links: React.FC<LinksProps> = ({ onLinkClick }) => {
   );
 };
 
-export default Links;
+export default NavLinks;
