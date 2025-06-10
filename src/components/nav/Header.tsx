@@ -4,6 +4,7 @@ import logoImage from '../../media/tona-tree.PNG';
 import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
 import emailIcon from '../../media/email.svg'; // Import the Email icon
 import hamburgerIcon from '../../media/hamburger.svg'; // Import the Hamburger icon
+import BREAK_POINTS from '../../constants/break-points';
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -75,7 +76,7 @@ const HamburgerIcon = styled.img`
   filter: brightness(0) invert(1); /* Assuming you want it white like other icons */
   cursor: pointer; /* Indicate it will be clickable later */
 
-  @media (max-width: 768px) { /* Show on mobile devices */
+  @media (max-width: ${BREAK_POINTS.MOBILE}) { /* Show on mobile devices */
     display: block;
   }
 `;
@@ -104,7 +105,7 @@ const NavLinks = styled.div`
   justify-content: end;
   flex: 2;
 
-  @media (max-width: 768px) { /* Hide on mobile devices */
+  @media (max-width: ${BREAK_POINTS.MOBILE}) { /* Hide on mobile devices */
     display: none;
   }
 `;
@@ -123,11 +124,12 @@ interface DrawerContainerProps {
 }
 
 const DrawerContainer = styled.div<DrawerContainerProps>`
+  --drawer-width: 250px;
   display: none; /* Hidden by default */
   position: fixed;
   top: var(--nav-header-height); /* Start below the header */
-  left: ${({ isOpen }) => isOpen ? '0' : '-250px'}; /* Control position based on isOpen */
-  width: 250px; 
+  left: ${({ isOpen }) => isOpen ? '0' : 'calc(-1 * var(--drawer-width))'}; /* Control position based on isOpen */
+  width: var(--drawer-width); 
   height: calc(100vh - var(--nav-header-height)); /* Fill remaining viewport height */
   background-color: var(--shell-background-color);
   padding: 1rem;
@@ -135,7 +137,7 @@ const DrawerContainer = styled.div<DrawerContainerProps>`
   box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Optional: add a subtle shadow, adjusted for left side */
   transition: left 0.3s ease-in-out; /* Animate the left property */
 
-  @media (max-width: 768px) { /* Show on mobile devices */
+  @media (max-width: ${BREAK_POINTS.MOBILE}) { /* Show on mobile devices */
     display: block; /* Or 'flex' if you need to align children directly */
   }
 `;
