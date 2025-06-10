@@ -11,6 +11,7 @@ import EventCard from './components/EventCard';
 const GlobalStyle = createGlobalStyle`
   body {
     --nav-header-height: 4rem;
+    --nav-header-background-color: #2b4a2d;
   }
 
   body {

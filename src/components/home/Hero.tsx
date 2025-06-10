@@ -14,19 +14,25 @@ const VideoElement = styled.video`
   position: relative;
 `;
 
-interface OverlaySVGProps {
+interface OverlayPathProps {
   scale: number;
 }
 
-const OverlaySVG = styled.svg<OverlaySVGProps>`
+const OverlaySVG = styled.svg`
   position: absolute;
   bottom: -1px;
   left: 0;
   width: 100%;
   height: auto;
   z-index: 2;
-  transform-origin: bottom;
-  transform: scale(1, ${({ scale }) => scale / 100});
+`;
+
+const OverlayPath = styled.path<OverlayPathProps>`
+  fill: var(--nav-header-background-color);
+  ${({ scale }) => scale === 100 ? '' : `
+    transform-origin: bottom;
+    transform: scale(1, ${scale / 100});
+  `}
 `;
 
 interface HeroProps {
@@ -86,8 +92,8 @@ const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
         <source src={heroVideo} type="video/mp4" /> 
         Your browser does not support the video tag.
       </VideoElement>
-      <OverlaySVG viewBox="0 0 160 90" scale={svgScale}>
-        <path fill="#2b4a2d" d="M 0 82 C 13 92 52 92 70 82 C 103 65 104 54 133 50 C 147 48 154 52 160 54 V 90 H 0 V 85"></path>
+      <OverlaySVG viewBox="0 0 160 90" scale={100}>
+        <OverlayPath d="M 0 82 C 13 92 52 92 70 82 C 103 65 104 54 133 50 C 147 48 154 52 160 54 V 90 H 0 V 85" scale={svgScale} />
       </OverlaySVG>
     </HeroContainer>
   );
