@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
-import emailIcon from '../../media/email.svg'; // Import the Email icon
 import hamburgerIcon from '../../media/hamburger.svg'; // Import the Hamburger icon
 import BREAK_POINTS from '../../constants/break-points';
 import NavLinks from './NavLinks'; // Updated import name
+import ContactUsLinks from './ContactUsLinks'; // Import the new ContactUsLinks component
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -57,17 +57,6 @@ const ContactUsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem; /* Add some space between icons */
-`;
-
-const IconLink = styled.a`
-  display: inline-block;
-  line-height: 0;
-`;
-
-const ContactIcon = styled.img`
-  height: 2rem;
-  width: auto;
-  filter: brightness(0) invert(1); 
 `;
 
 const HamburgerIcon = styled.img`
@@ -171,12 +160,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
               <LogoText>TONA</LogoText>
             </LogoContainer>
             <ContactUsContainer>
-              <IconLink href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">
-                <ContactIcon src={facebookIcon} alt="Facebook" />
-              </IconLink>
-              <IconLink href="mailto:tona.sanjose@gmail.com" aria-label="Send us an email">
-                <ContactIcon src={emailIcon} alt="Email" />
-              </IconLink>
+              <ContactUsLinks />
             </ContactUsContainer>
           </HeaderLeftGroup>
           <NavLinksContainer>
