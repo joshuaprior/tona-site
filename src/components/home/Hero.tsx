@@ -4,6 +4,8 @@ import heroVideo from '../../media/branch.mp4'; // Import the video
 
 const HeroContainer = styled.div`
   position: relative;
+  display: flex;
+  max-height: 50rem;
   overflow: hidden; /* Ensures video doesn't spill out as it slides down during scrolling. */
 `;
 
@@ -14,18 +16,19 @@ const VideoElement = styled.video`
   position: relative;
 `;
 
-interface OverlayPathProps {
-  scale: number;
-}
-
 const OverlaySVG = styled.svg`
   position: absolute;
   bottom: -1px;
   left: 0;
   width: 100%;
-  height: auto;
+  max-height: 35rem;
   z-index: 2;
 `;
+
+interface OverlayPathProps {
+  scale: number;
+}
+
 
 const OverlayPath = styled.path<OverlayPathProps>`
   fill: var(--nav-header-background-color);
@@ -92,7 +95,7 @@ const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
         <source src={heroVideo} type="video/mp4" /> 
         Your browser does not support the video tag.
       </VideoElement>
-      <OverlaySVG viewBox="0 0 160 90" scale={100}>
+      <OverlaySVG viewBox="0 0 160 90" preserveAspectRatio="none" scale={100}>
         <OverlayPath d="M 0 82 C 13 92 52 92 70 82 C 103 65 104 54 133 50 C 147 48 154 52 160 54 V 90 H 0 V 85" scale={svgScale} />
       </OverlaySVG>
     </HeroContainer>
