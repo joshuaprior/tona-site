@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 
-interface HeaderContainerProps {
-  background?: boolean;
-}
-
-const HeaderContainer = styled.header<HeaderContainerProps>`
+const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  background-color: ${({ background }) => background ? '#2b4a2d' : 'transparent'};
+  width: 100%;
   z-index: 1000;
+  height: var(--nav-header-height);
+`;
+
+const HeaderBackground = styled.div`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: var(--nav-header-height);
+  background-color: #2b4a2d;
+  z-index: 1;
   /* box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); */
 `;
 
@@ -25,7 +29,9 @@ const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  height: 100%; /* Fill the HeaderContainer's height */
+  position: relative; /* To establish a stacking context for z-index */
+  z-index: 2; /* Ensure NavContent is above BottomFill */
   @media (min-width: 640px) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -88,20 +94,23 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background }) => {
   };
 
   return (
-    <HeaderContainer background={background}>
-        <NavContent>
-          <LogoContainer>
-            <LogoImage src={logoImage} alt="TONA Logo" />
-            <LogoText>TONA</LogoText>
-          </LogoContainer>
-          
-          <NavLinks>
-            <NavLink href="#" onClick={(e) => handleClick(e, 'home')}>Home</NavLink>
-            <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
-            <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
-          </NavLinks>
-        </NavContent>
-    </HeaderContainer>
+    <>
+      <HeaderContainer>
+          <NavContent>
+            <LogoContainer>
+              <LogoImage src={logoImage} alt="TONA Logo" />
+              <LogoText>TONA</LogoText>
+            </LogoContainer>
+            
+            <NavLinks>
+              <NavLink href="#" onClick={(e) => handleClick(e, 'home')}>Home</NavLink>
+              <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
+              <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
+            </NavLinks>
+          </NavContent>
+      </HeaderContainer>
+      <HeaderBackground />
+    </>
   );
 };
 

@@ -40,14 +40,6 @@ const OverlaySVG = styled.svg<OverlaySVGProps>`
   transform: scale(1, ${({ scale }) => scale / 100}); /* Apply vertical scale */
 `;
 
-const BottomFill = styled.div`
-  flex: 0 0 4rem;
-  width: 100%;
-  height: 4rem;
-  background-color: #2b4a2d;
-  z-index: 1;
-`;
-
 interface HeroProps {
   onViewChange?: (isInView: boolean) => void;
 }
@@ -105,7 +97,6 @@ const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
         <source src={heroVideo} type="video/mp4" /> 
         Your browser does not support the video tag.
       </VideoElement>
-      <BottomFill />
       <OverlaySVG viewBox="0 0 160 90" scale={svgScale}>
         <path fill="#2b4a2d" d="M 0 82 C 13 92 52 92 70 82 C 103 65 104 54 133 50 C 147 48 154 52 160 54 V 90 H 0 V 85"></path>
       </OverlaySVG>
