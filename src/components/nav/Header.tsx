@@ -5,6 +5,7 @@ import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
 import emailIcon from '../../media/email.svg'; // Import the Email icon
 import hamburgerIcon from '../../media/hamburger.svg'; // Import the Hamburger icon
 import BREAK_POINTS from '../../constants/break-points';
+import Links from './Links'; // Import the new Links component
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -110,15 +111,6 @@ const NavLinks = styled.div`
   }
 `;
 
-const NavLink = styled.a`
-  color: var(--shell-color);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: color 0.2s ease-in-out;
-  cursor: pointer;
-`;
-
 interface DrawerContainerProps {
   isOpen: boolean;
 }
@@ -138,7 +130,10 @@ const DrawerContainer = styled.div<DrawerContainerProps>`
   transition: left 0.3s ease-in-out; /* Animate the left property */
 
   @media (max-width: ${BREAK_POINTS.MOBILE}) { /* Show on mobile devices */
-    display: block; /* Or 'flex' if you need to align children directly */
+    display: flex; /* Or 'flex' if you need to align children directly */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem; /* Add spacing between NavLink items in the drawer */
   }
 `;
 
@@ -185,15 +180,15 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
             </ContactUsContainer>
           </HeaderLeftGroup>
           <NavLinks>
-            <NavLink href="#" onClick={(e) => handleClick(e, 'home')}>Home</NavLink>
-            <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
-            <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
+            <Links onLinkClick={handleClick} />
           </NavLinks>
         </NavContent>
       </HeaderContainer>
       {children}
       <HeaderBackground />
-      <DrawerContainer isOpen={isDrawerOpen} />
+      <DrawerContainer isOpen={isDrawerOpen}>
+        <Links onLinkClick={handleClick} />
+      </DrawerContainer>
     </>
   );
 };
