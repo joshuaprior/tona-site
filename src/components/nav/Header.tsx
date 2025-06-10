@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 
-interface NavContainerProps {
+interface HeaderContainerProps {
   background?: boolean;
 }
 
-const NavContainer = styled.nav<NavContainerProps>`
+const HeaderContainer = styled.header<HeaderContainerProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -76,33 +76,33 @@ const RightSection = styled.div`
   justify-content: flex-end;
 `;
 
-interface NavProps {
+interface HeaderProps {
   onNavigation: (page: { page: 'home' | 'about' | 'documents' }) => void;
   background?: boolean;
 }
 
-const Nav: React.FC<NavProps> = ({ onNavigation, background }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigation, background }) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'about' | 'documents') => {
     e.preventDefault();
     onNavigation({ page });
   };
 
   return (
-    <NavContainer background={background}>
-      <NavContent>
-        <LogoContainer>
-          <LogoImage src={logoImage} alt="TONA Logo" />
-          <LogoText>TONA</LogoText>
-        </LogoContainer>
-        
-        <NavLinks>
-          <NavLink href="#" onClick={(e) => handleClick(e, 'home')}>Home</NavLink>
-          <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
-          <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
-        </NavLinks>
-      </NavContent>
-    </NavContainer>
+    <HeaderContainer background={background}>
+        <NavContent>
+          <LogoContainer>
+            <LogoImage src={logoImage} alt="TONA Logo" />
+            <LogoText>TONA</LogoText>
+          </LogoContainer>
+          
+          <NavLinks>
+            <NavLink href="#" onClick={(e) => handleClick(e, 'home')}>Home</NavLink>
+            <NavLink href="#" onClick={(e) => handleClick(e, 'about')}>About</NavLink>
+            <NavLink href="#" onClick={(e) => handleClick(e, 'documents')}>Documents</NavLink>
+          </NavLinks>
+        </NavContent>
+    </HeaderContainer>
   );
 };
 
-export default Nav; 
+export default Header;

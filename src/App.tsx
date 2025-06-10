@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import Nav from './components/nav/Nav';
+import Header from './components/nav/Header';
 import Home from './components/home/Home';
 import About from './components/about/About';
 import Documents from './components/documents/Documents';
 import UpcomingEvents from './components/UpcomingEvents';
-import Hero from './components/home/Hero'; // Import the Hero component
+import Hero from './components/home/Hero';
 import EventCard from './components/EventCard';
 
 const GlobalStyle = createGlobalStyle`
+  body {
+    --nav-header-height: 4rem;
+  }
+
   body {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -38,12 +42,6 @@ const AppContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   background-color: #f5f5f5;
-`;
-
-const Header = styled.header`
-  position: relative;
-  background-color: white;
-  height: 50rem;
 `;
 
 const Main = styled.main`
@@ -154,12 +152,14 @@ const App: React.FC = () => {
     <>
       <GlobalStyle />
       <AppContainer>
-        <Nav onNavigation={handleNavigation} background={currentPage === 'home' ? !isHeroInView : true} />
+        <Header onNavigation={handleNavigation} background={currentPage === 'home' ? !isHeroInView : true} />
+        {/*
         <Header>
           {currentPage === 'home' && (
             <Hero onViewChange={(inView) => setIsHeroInView(inView)} />
           )}
         </Header>
+        */}
 
         <Main>
           <MainContent>
