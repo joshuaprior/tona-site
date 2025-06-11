@@ -4,9 +4,9 @@ import Header from './components/nav/Header';
 import Home from './components/home/Home';
 import About from './components/about/About';
 import Documents from './components/documents/Documents';
-import UpcomingEvents from './components/UpcomingEvents';
+import UpcomingEvents from './components/home/upcoming-events/UpcomingEvents';
 import Hero from './components/home/Hero';
-import EventCard from './components/EventCard';
+import EventCard from './components/home/upcoming-events/EventCard';
 
 const GlobalStyle = createGlobalStyle`
   body {

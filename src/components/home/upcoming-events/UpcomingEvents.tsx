@@ -1,6 +1,6 @@
 import React, { ReactNode, useRef, useEffect, useState, Children } from 'react';
 import styled from 'styled-components';
-import backgroundImage from '../media/background.jpg';
+import backgroundImage from '../../../media/branch.png';
 import EventTree, { AnchorRefs } from './EventTree';
 
 const AspectRatioBox = styled.section`

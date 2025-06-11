@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import UpcomingEvents from '../UpcomingEvents';
-import EventCard from '../EventCard';
+import UpcomingEvents from './upcoming-events/UpcomingEvents';
+import EventCard from './upcoming-events/EventCard';
 
 const Section = styled.section`
   background-color: white;

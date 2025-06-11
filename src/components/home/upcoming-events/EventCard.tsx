@@ -7,7 +7,7 @@ const Card = styled.div`
   height: 100px;
   background-color: red;
   z-index: 4;
-  opacity: 0.1;
+  opacity: 0.3;
 `;
 
 const EventCard: React.FC = () => {
