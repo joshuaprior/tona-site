@@ -2,14 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BoardMemberContainer = styled.div`
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 200px;
 `;
 
 const MemberImage = styled.img`
@@ -26,6 +21,7 @@ const MemberName = styled.h3`
   color: #111827;
   margin: 0 0 0.5rem 0;
   text-align: center;
+  white-space: nowrap;
 `;
 
 const MemberTitle = styled.p`

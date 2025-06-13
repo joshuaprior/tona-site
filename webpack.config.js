@@ -42,6 +42,10 @@ module.exports = (env, argv) => {
           {
             from: 'src/config',
             to: 'config'
+          },
+          {
+            from: 'src/media',
+            to: 'media'
           }
         ]
       }),

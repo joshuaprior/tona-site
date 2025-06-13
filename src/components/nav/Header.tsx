@@ -22,6 +22,13 @@ const HeaderBackground = styled.div`
   height: var(--nav-header-height);
   background-color: var(--shell-background-color);
   z-index: 1;
+  margin-bottom: 2rem;
+
+  background: rgba( 43, 74, 45, 0.8 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 9px );
+  -webkit-backdrop-filter: blur( 9px );
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 `;
 
 const NavContent = styled.div`
@@ -56,7 +63,7 @@ const HeaderLeftGroup = styled.div`
 const ContactUsContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem; /* Add some space between icons */
+  gap: 0.75rem;
 
   @media (max-width: ${BREAK_POINTS.MOBILE}) {
     display: none;
@@ -64,13 +71,13 @@ const ContactUsContainer = styled.div`
 `;
 
 const HamburgerIcon = styled.img`
-  display: none; /* Hidden by default */
-  height: 1.5rem; /* Adjust size as needed */
+  display: none;
+  height: 1.5rem;
   width: auto;
-  filter: brightness(0) invert(1); /* Assuming you want it white like other icons */
-  cursor: pointer; /* Indicate it will be clickable later */
+  filter: brightness(0) invert(1);
+  cursor: pointer;
 
-  @media (max-width: ${BREAK_POINTS.MOBILE}) { /* Show on mobile devices */
+  @media (max-width: ${BREAK_POINTS.MOBILE}) {
     display: block;
   }
 `;
@@ -86,7 +93,7 @@ const LogoContainer = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    flex: none; /* Override desktop flex behavior */
+    flex: none;
   }
 `;
 
@@ -107,7 +114,7 @@ const NavLinksContainer = styled.div`
   justify-content: end;
   flex: 2;
 
-  @media (max-width: ${BREAK_POINTS.MOBILE}) { /* Hide on mobile devices */
+  @media (max-width: ${BREAK_POINTS.MOBILE}) {
     display: none;
   }
 `;
@@ -118,29 +125,29 @@ interface DrawerContainerProps {
 
 const DrawerContainer = styled.div<DrawerContainerProps>`
   --drawer-width: 250px;
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
-  top: var(--nav-header-height); /* Start below the header */
-  left: ${({ isOpen }) => isOpen ? '0' : 'calc(-1 * var(--drawer-width))'}; /* Control position based on isOpen */
+  top: var(--nav-header-height);
+  left: ${({ isOpen }) => isOpen ? '0' : 'calc(-1 * var(--drawer-width))'};
   width: var(--drawer-width); 
-  height: calc(100vh - var(--nav-header-height)); /* Fill remaining viewport height */
+  height: calc(100vh - var(--nav-header-height));
   background-color: var(--shell-background-color);
   padding: 1rem;
-  z-index: 999; /* Below HeaderContainer (1000) but above most other content */
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Optional: add a subtle shadow, adjusted for left side */
-  transition: left 0.3s ease-in-out; /* Animate the left property */
+  z-index: 999;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transition: left 0.3s ease-in-out;
 
-  @media (max-width: ${BREAK_POINTS.MOBILE}) { /* Show on mobile devices */
-    display: flex; /* Or 'flex' if you need to align children directly */
+  @media (max-width: ${BREAK_POINTS.MOBILE}) {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem; /* Add spacing between NavLink items in the drawer */
+    gap: 1rem;
   }
 `;
 
 const DrawerContactUsContainer = styled.div`
-  display: flex; /* To align items if needed, e.g., for multiple rows of contact info */
-  gap: 0.75rem; /* Consistent with ContactUsContainer */
+  display: flex;
+  gap: 0.75rem;
 `;
 
 const RightSection = styled.div`
