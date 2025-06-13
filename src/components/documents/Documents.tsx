@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, CardTitle, CardText } from '../Cards';
+import { Card, CardTitle, CardText } from '../cards/Cards';
 
 const List = styled.ul`
   margin-top: 1rem;

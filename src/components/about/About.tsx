@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import tonaTreeImage from '../../media/tona-tree.PNG';
 import BoardMember from './BoardMember';
 import fetchPath from '../../util/fetchPath';
-import { Card, CardTitle, CardText, CardBackground } from '../Cards';
+import { Card, CardTitle, CardText, CardBackground } from '../cards/Cards';
+import { CardGrid } from '../cards/CardGrid';
 
 interface BoardMember {
   image?: string;
@@ -34,13 +35,6 @@ const CenteredImage = styled.img`
   max-width: 90%;
   object-fit: cover;
   opacity: 0.1;
-`;
-
-const BoardMembersGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
 `;
 
 const LoadingText = styled.p`
@@ -104,7 +98,7 @@ const About: React.FC = () => {
           ) : error ? (
             <ErrorText>{error}</ErrorText>
           ) : (
-            <BoardMembersGrid>
+            <CardGrid>
               {boardMembers.map((member, index) => (
                 <Card key={index}>
                   <BoardMember
@@ -114,7 +108,7 @@ const About: React.FC = () => {
                   />
                 </Card>
               ))}
-            </BoardMembersGrid>
+            </CardGrid>
           )}
       </CardBackground>
     </>

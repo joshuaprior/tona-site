@@ -1,7 +1,7 @@
 import React from 'react';
 import UpcomingEvents from './upcoming-events/UpcomingEvents';
 import EventCard from './upcoming-events/EventCard';
-import { Card, CardTitle, CardText, CardBackground } from '../Cards';
+import { Card, CardTitle, CardText, CardBackground } from '../cards/Cards';
 
 const Home: React.FC = () => {
   return (
