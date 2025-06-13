@@ -118,7 +118,7 @@ const GridImageTile = styled.div<{ $imageUrl: string }>`
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 50px; /* Adds rounded corners to the image tiles */
-  opacity: .3;
+  opacity: .1;
 `;
 
 const App: React.FC = () => {
