@@ -8,6 +8,7 @@ const TimelineContainer = styled.div`
   margin: 50px auto;
   overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
   padding-bottom: 40px; /* Add some padding at the bottom for the last event */
+  --timeline-color: red; /* Define the custom property */
 `;
 
 const TimelineList = styled.ul`
@@ -20,11 +21,11 @@ const TimelineList = styled.ul`
   &::before {
     content: '';
     position: absolute;
-    top: 36px; /* Adjusted to position between Time and Event */
+    top: 2.25rem; /* 36px / 16px = 2.25rem */
     left: 0;
     right: 0;
-    height: 4px;
-    background: red; /* The red timeline line */
+    height: 0.25rem; /* 4px / 16px = 0.25rem */
+    background: var(--timeline-color); /* Use the custom property */
     transform: translateY(-50%);
     z-index: 1;
   }
@@ -58,12 +59,12 @@ const TimelineItem = styled.li<TimelineItemProps>`
   &::before {
     content: ''; /* Required for pseudo-elements */
     position: absolute;
-    top: 24px; /* Position at the bottom of TimelineTime (20px padding + 13px half height of TimelineTime) */
+    top: 1.5rem; /* 24px / 16px = 1.5rem */
     left: 50%;
     transform: translateX(-50%);
-    width: 4px; /* Vertical line thickness */
-    height: 24px; /* Distance from bottom of TimelineTime (33px) to bottom of TimelineEvent margin (80px)*/
-    background-color: red; /* Vertical line color */
+    width: 0.25rem; /* 4px / 16px = 0.25rem */
+    height: 1.5rem; /* 24px / 16px = 1.5rem */
+    background-color: var(--timeline-color); /* Use the custom property */
     /* No border or border-radius needed for a line */
     z-index: 2; /* Same z-index as TimelineEvent to ensure the line is behind the content */
     /* No need for border-radius as it's a straight line */
