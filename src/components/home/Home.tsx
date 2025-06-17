@@ -3,10 +3,12 @@ import UpcomingEvents from './upcoming-events/UpcomingEvents';
 import EventCard from './upcoming-events/EventCard';
 import { Card, CardTitle, CardText, CardBackground } from '../cards/Cards';
 import { CardGrid } from '../cards/CardGrid';
+import Timeline from './upcoming-events/Timeline';
 
 const Home: React.FC = () => {
   return (
     <>
+      <Timeline />
       {/*
       <UpcomingEvents>
         <EventCard />
