@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Card, CardTitle } from '../../cards/Cards';
+import { fetchTimelineEvents, TimelineEventData } from './logic';
 
 const TimelineContainer = styled.div`
   width: 90%;
@@ -97,35 +98,37 @@ const TimelineTime = styled.div`
 `;
 
 const Timeline: React.FC = () => {
+  const [events, setEvents] = useState<TimelineEventData[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        const fetchedEvents = await fetchTimelineEvents();
+        setEvents(fetchedEvents);
+      } catch (err) {
+        setError("Failed to load events.");
+        console.error(err);
+      }
+    };
+
+    loadEvents();
+  }, []);
+
   return (
     <Card>
       <CardTitle>Upcoming Events</CardTitle>
       <TimelineContainer>
+        {error && <p>{error}</p>}
         <TimelineList>
-            <TimelineItem>
-                <TimelineTime>MAY '16</TimelineTime>
-                <TimelineEvent>General Conference at Oregon Convention Center</TimelineEvent>
+          {events.map((event, index) => (
+            <TimelineItem key={index}>
+              <TimelineTime>{new Date(event.start).toLocaleDateString('en-US', { month: 'short', year: '2-digit' }).toUpperCase()}</TimelineTime>
+              <TimelineEvent>
+                {event.description}
+              </TimelineEvent>
             </TimelineItem>
-            <TimelineItem>
-                <TimelineTime>OCT '16</TimelineTime>
-                <TimelineEvent>
-                    Members named, <br/>
-                    32 United Methodists, <br/>
-                    8 Bishops, 11 laity, 11 elders, <br/>
-                    2 deacons
-                </TimelineEvent>
-            </TimelineItem>
-            <TimelineItem>
-                <TimelineTime>JAN '17</TimelineTime>
-                <TimelineEvent>Praying Our Way Forward Phase 2 begins</TimelineEvent>
-            </TimelineItem>
-            <TimelineItem>
-                <TimelineTime>NOV '17</TimelineTime>
-                <TimelineEvent>
-                    Report to Bishops:<br/>
-                    Bishops review three possible models from Commission, Lake Junaluska
-                </TimelineEvent>
-            </TimelineItem>
+          ))}
         </TimelineList>
     </TimelineContainer>
     </Card>
