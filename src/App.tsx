@@ -10,7 +10,9 @@ const GlobalStyle = createGlobalStyle`
   body {
     --nav-header-height: 4rem;
     --shell-color: white;
-    --shell-background-color: #2b4a2d;
+    --shell-opacity: .8;
+    --shell-background: rgba( 43,74,45, .8);
+    
   }
 
   body {
@@ -76,7 +78,7 @@ const FooterContent = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 1rem;
-  background-color: var(--shell-background-color);
+  background: var(--shell-background);
   box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
 
   @media (min-width: 640px) {

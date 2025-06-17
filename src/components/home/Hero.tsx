@@ -18,7 +18,7 @@ const VideoElement = styled.video`
 
 const OverlaySVG = styled.svg`
   position: absolute;
-  bottom: -1px;
+  bottom: var(--nav-header-height);
   left: 0;
   width: 100%;
   max-height: 35rem;
@@ -31,10 +31,11 @@ interface OverlayPathProps {
 
 
 const OverlayPath = styled.path<OverlayPathProps>`
-  fill: var(--shell-background-color);
+  fill: rgb( from var(--shell-background) r g b / 1);
   ${({ scale }) => scale === 100 ? '' : `
     transform-origin: bottom;
     transform: scale(1, ${scale / 100});
+    fill: rgb( from var(--shell-background) r g b / calc(alpha + ${0.2 * scale / 100}));
   `}
 `;
 

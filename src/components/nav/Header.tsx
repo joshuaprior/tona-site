@@ -20,15 +20,16 @@ const HeaderBackground = styled.div`
   top: 0;
   width: 100%;
   height: var(--nav-header-height);
-  background-color: var(--shell-background-color);
+  background: var(--shell-background);
   z-index: 1;
+  margin-top: calc(-1 * var(--nav-header-height));
   margin-bottom: 2rem;
 
-  background: rgba( 43, 74, 45, 0.8 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 9px );
   -webkit-backdrop-filter: blur( 9px );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border-top: none;
 `;
 
 const NavContent = styled.div`
