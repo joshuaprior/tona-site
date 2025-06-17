@@ -5,11 +5,8 @@ import { fetchTimelineEvents, TimelineEventData } from './logic';
 import TimelineCard from './TimelineCard';
 
 const TimelineContainer = styled.div`
-  width: 90%;
-  max-width: 1200px;
-  margin: 50px auto;
+  margin: 0px 20px;
   overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
-  padding-bottom: 40px; /* Add some padding at the bottom for the last event */
   --timeline-color: red; /* Define the custom property */
 `;
 
@@ -19,6 +16,7 @@ const TimelineList = styled.ul`
   margin: 0;
   padding: 0;
   position: relative;
+  gap: 20px; /* Add gap between timeline cards */
 
   &::before {
     content: '';
