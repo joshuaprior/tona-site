@@ -1,6 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
+import { TimelineEventData } from './logic';
 
-export const TimelineEvent = styled.div`
+const TimelineEventContent = styled.div`
   background: white;
   padding: 15px;
   border: 1px solid #ccc;
@@ -15,11 +17,7 @@ export const TimelineEvent = styled.div`
   font-size: 0.9em;
 `;
 
-export interface TimelineItemProps {
-  isFall18?: boolean;
-}
-
-export const TimelineItem = styled.li<TimelineItemProps>`
+const TimelineItemLayout = styled.li`
   flex: 1;
   position: relative;
   padding: 20px 0;
@@ -38,21 +36,6 @@ export const TimelineItem = styled.li<TimelineItemProps>`
     z-index: 2; /* Same z-index as TimelineEvent to ensure the line is behind the content */
     /* No need for border-radius as it's a straight line */
   }
-
-  /* Style for the FALL '18 multi-part event */
-  ${(props) =>
-    props.isFall18 &&
-    `
-    padding-bottom: 80px; /* Adjust to accommodate both descriptions */
-
-    ${TimelineEvent} {
-      margin-top: 60px; /* Adjust spacing */
-    }
-
-    ${TimelineEvent} + ${TimelineEvent} { /* Style the second event */
-      margin-top: 80px;
-    }
-  `}
 `;
 
 export const TimelineTime = styled.div`
@@ -65,6 +48,19 @@ export const TimelineTime = styled.div`
   border-radius: 5px;
 `;
 
-// Note: This file currently only exports styled-components and an interface.
-// It does not define a React component named TimelineCard.
-// If a React component is intended, it would need to be defined here.
+interface TimelineCardComponentProps {
+  event: TimelineEventData;
+}
+
+const TimelineCard: React.FC<TimelineCardComponentProps> = ({ event }) => {
+  return (
+    <TimelineItemLayout>
+      <TimelineTime>
+        {new Date(event.start).toLocaleDateString('en-US', { month: 'short', year: '2-digit' }).toUpperCase()}
+      </TimelineTime>
+      <TimelineEventContent dangerouslySetInnerHTML={{ __html: event.description }} />
+    </TimelineItemLayout>
+  );
+};
+
+export default TimelineCard;

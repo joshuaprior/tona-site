@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Card, CardTitle } from '../../cards/Cards';
 import { fetchTimelineEvents, TimelineEventData } from './logic';
-import { TimelineItem, TimelineTime, TimelineEvent } from './TimelineCard';
+import TimelineCard from './TimelineCard';
 
 const TimelineContainer = styled.div`
   width: 90%;
@@ -58,12 +58,7 @@ const Timeline: React.FC = () => {
         {error && <p>{error}</p>}
         <TimelineList>
           {events.map((event, index) => (
-            <TimelineItem key={index}>
-              <TimelineTime>{new Date(event.start).toLocaleDateString('en-US', { month: 'short', year: '2-digit' }).toUpperCase()}</TimelineTime>
-              <TimelineEvent>
-                {event.description}
-              </TimelineEvent>
-            </TimelineItem>
+            <TimelineCard key={index} event={event} />
           ))}
         </TimelineList>
     </TimelineContainer>
