@@ -39,7 +39,7 @@ export const CardTitle = styled.h2`
 `;
 
 export const CardText = styled.p`
-  color: #4b5563;
+  
 `;
 
 export const CardBackground = styled.section`
