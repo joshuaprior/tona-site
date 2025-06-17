@@ -7,7 +7,7 @@ import TimelineCard from './TimelineCard';
 const TimelineContainer = styled.div`
   margin: 0px 20px;
   overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
-  --timeline-color: red; /* Define the custom property */
+  --timeline-color: rgb(145 94 43);
 `;
 
 const TimelineList = styled.ul`
@@ -50,7 +50,7 @@ const Timeline: React.FC = () => {
   }, []);
 
   return (
-    <Card>
+    <Card tint="green">
       <CardTitle>Upcoming Events</CardTitle>
       <TimelineContainer>
         {error && <p>{error}</p>}
