@@ -29,18 +29,20 @@ const HeaderBackground = styled.div<HeaderBackgroundProps>`
   margin-bottom: 2rem;
 
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 9px );
-  -webkit-backdrop-filter: blur( 9px );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   border-top: none;
 
-  background: ${({ headerCollapse }) => (
+  ${({ headerCollapse }) => (
     headerCollapse < 100
-      ? `rgba( from var(--shell-background) r g b / calc(alpha + (1 - alpha) * ${(100 - headerCollapse) / 100}))`
-      : 'var(--shell-background)'
-  )};
-  
-  
+      ? `
+        background: rgba( from var(--shell-background) r g b / calc(alpha + (1 - alpha) * ${(100 - headerCollapse) / 100}));
+      `
+      : `
+        background: var(--shell-background);
+        backdrop-filter: blur( 9px );
+        -webkit-backdrop-filter: blur( 9px );
+      `
+  )}
 `;
 
 const NavContent = styled.div`
