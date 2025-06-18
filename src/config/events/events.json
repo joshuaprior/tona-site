@@ -5,29 +5,9 @@
         "description": "Thousand Oaks Neighborhood Association is pleased to announce the designation of Thousand Oaks Park as a Heritage Grove. Join us as we unveil our new sign and celebrate this special recognition."
     },
     {
-        "title": "Creek Clean Up",
-        "start": "2025-04-11T16:30:00.000Z",
-        "end": "2025-04-11T19:30:00.000Z",
-        "description": "Please join us if you are available for a Creek Clean up Event with the South Bay Clean Creeks Coalition.",
-        "flyer": "park-volunteer-flyer.pdf"
-    },
-    {
-        "title": "TONA General Meeting",
-        "start": "2025-04-17T02:00:00.000Z",
-        "end": "2025-04-18T03:00:00.000Z",
-        "description": "This meeting will feature our Councilmember and Vice Mayor, Pam Foley and the new police captain for our area, Steven Payne."
-    },
-    {
         "title": "Easter Egg Hunt",
         "start": "2025-04-19T16:30:00.000Z",
         "description": "Dads meet to hide the eggs"
-    },
-    {
-        "title": "Easter Egg Hunt",
-        "start": "2025-04-19T17:00:00.000Z",
-        "image": "easter.png",
-        "description": "Children meet on Normington Way (near the Thousand Oaks Park sign)",
-        "flyer": "easter-flyer.png"
     },
     {
         "title": "Easter Bunny",
@@ -41,18 +21,5 @@
         "image": "family-picnic.png",
         "description": "Join us for an evening of fun with our neighbors at Thousand Oaks Park",
         "flyer": "summer-picnic-flyer.pdf"
-    },
-    {
-        "title": "4th of July Parade",
-        "start": "2025-07-04T17:00:00.000Z",
-        "end": "2025-07-04T18:00:00.000Z",
-        "image": "forthofjuly.png",
-        "description": "Enjoy a parade by and for the TONA community."
-    },
-    {
-        "title": "Apple Pie Contest",
-        "start": "2025-07-04T17:00:00.000Z",
-        "description": "Join your neighbors for a deliciously fun apple pie baking contest as we celebrate Independence Day together!",
-        "flyer": "apple-pie-contest-flyer.pdf"
     }
 ]
