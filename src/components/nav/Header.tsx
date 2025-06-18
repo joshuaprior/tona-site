@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
@@ -180,38 +180,43 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children, onH
   const headerBackgroundRef = useRef<HTMLDivElement>(null);
   const [headerCollapse, setHeaderCollapse] = useState(0);
 
-  useEffect(() => {
-    function handleScroll() {
-      if (headerBackgroundRef.current) {
-        const headerTopRelativeToViewport = headerBackgroundRef.current.getBoundingClientRect().top;
-        const headerDistanceFromTopOfDocument = headerTopRelativeToViewport + window.scrollY;
-        const collapsePercentage = headerDistanceFromTopOfDocument !== 0 ? 100 - (headerTopRelativeToViewport / headerDistanceFromTopOfDocument) * 100 : 100;
-        setHeaderCollapse(prevCollapse => {
-          if (prevCollapse !== collapsePercentage && onHeaderCollapseChange) {
-            onHeaderCollapseChange(collapsePercentage);
-          }
-          return collapsePercentage;
-        });
+  const handleScroll = useCallback(() => {
+    if (headerBackgroundRef.current) {
+      const headerTopRelativeToViewport = headerBackgroundRef.current.getBoundingClientRect().top;
+      const headerDistanceFromTopOfDocument = headerTopRelativeToViewport + window.scrollY;
+      
+      let calculatedCollapsePercentage = 100; // Default to fully collapsed
+      if (headerDistanceFromTopOfDocument !== 0) {
+        const rawPercentage = 100 - (headerTopRelativeToViewport / headerDistanceFromTopOfDocument) * 100;
+        calculatedCollapsePercentage = Math.max(0, Math.min(100, rawPercentage));
       }
+      
+      setHeaderCollapse(prevCollapse => {
+        if (prevCollapse !== calculatedCollapsePercentage && onHeaderCollapseChange) {
+          onHeaderCollapseChange(calculatedCollapsePercentage);
+        }
+        return calculatedCollapsePercentage;
+      });
     }
+  }, [onHeaderCollapseChange]); // setHeaderCollapse is stable, headerBackgroundRef is stable
 
+  useLayoutEffect(() => {
     handleScroll();
-
     window.addEventListener('scroll', handleScroll);
-
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [onHeaderCollapseChange]);
-  
+  }, [handleScroll]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'about' | 'documents') => {
     e.preventDefault();
+    
     onNavigation({ page });
     if (isDrawerOpen) {
       setIsDrawerOpen(false); // Close drawer on navigation
     }
+    
+    setTimeout(handleScroll, 0);
   };
 
   return (
