@@ -126,9 +126,11 @@ const GridImageTile = styled.div<{ $imageUrl: string }>`
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'documents'>('home');
   const [isHeroInView, setIsHeroInView] = useState(true);
+  const [headerCollapse, setHeaderCollapse] = useState(0);
 
   const handleNavigation = ({ page }: { page: 'home' | 'about' | 'documents' }) => {
     setCurrentPage(page);
+    window.scrollTo(0, 0); // Scroll to top on page change
   };
 
   const renderPageContent = () => {
@@ -153,9 +155,13 @@ const App: React.FC = () => {
             <GridImageTile key={index} $imageUrl={`media/background/image${(index + 1).toString().padStart(2, '0')}.png`} />
           ))}
         </BackgroundGrid>
-        <Header onNavigation={handleNavigation} background={currentPage === 'home' ? !isHeroInView : true}>
+        <Header
+          onNavigation={handleNavigation}
+          background={currentPage === 'home' ? !isHeroInView : true}
+          onHeaderCollapseChange={setHeaderCollapse}
+        >
           {currentPage === 'home' && (
-            <Hero onViewChange={(inView) => setIsHeroInView(inView)} />
+            <Hero onViewChange={(inView) => setIsHeroInView(inView)} headerCollapse={headerCollapse} />
           )}
         </Header>
 

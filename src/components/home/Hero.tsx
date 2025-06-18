@@ -41,57 +41,15 @@ const OverlayPath = styled.path<OverlayPathProps>`
 
 interface HeroProps {
   onViewChange?: (isInView: boolean) => void;
+  headerCollapse?: number; // Add new prop for header collapse percentage
 }
 
-const Hero: React.FC<HeroProps> = ({ onViewChange }) => {
-  const [videoOffset, setVideoOffset] = useState(0);
-  const [svgScale, setSvgScale] = useState(100);
-  const heroContainerRef = useRef<HTMLDivElement>(null);
-  const heroContainerHeightRef = useRef<number>(0);
-
-  const handleScroll = useCallback(() => {
-    const scrollY = window.scrollY;
-    const heroHeight = heroContainerHeightRef.current;
-
-    // Video offset logic
-    const videoScrollFactor = 0.5;
-    setVideoOffset(scrollY * videoScrollFactor);
-
-    // SVG scale logic
-    if (heroHeight > 0) {
-      const scrollPercentage = (scrollY / heroHeight) * 100 * 1.2;
-      const newScale = 100 - Math.max(0, Math.min(100, scrollPercentage));
-      setSvgScale(newScale);
-    } else {
-      setSvgScale(0);
-    }
-
-    // Call onViewChange if provided
-    if (onViewChange) {
-      onViewChange(scrollY <= heroHeight - 64);
-    }
-  }, [onViewChange, setVideoOffset, setSvgScale]);
-
-  useEffect(() => {
-    const calculateAndSetInitialSizing = () => {
-      if (heroContainerRef.current) {
-        heroContainerHeightRef.current = heroContainerRef.current.offsetHeight;
-        // Call handleScroll to set initial scale based on current scroll position
-        handleScroll();
-      }
-    };
-    calculateAndSetInitialSizing(); // Set height and initial scroll position effects
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll]);
-
+const Hero: React.FC<HeroProps> = ({ onViewChange, headerCollapse }) => {
+  const videoOffset = window.scrollY * 0.5;
+  const svgScale = 100 - (headerCollapse || 0);
+  
   return (
-    <HeroContainer ref={heroContainerRef}>
+    <HeroContainer>
       <VideoElement autoPlay loop muted playsInline style={{ transform: `translateY(${videoOffset}px)` }}> {/* Current: video moves DOWN with scroll */}
         <source src={heroVideo} type="video/mp4" /> 
         Your browser does not support the video tag.
