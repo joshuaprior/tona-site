@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import logoImage from '../../media/tona-tree.PNG';
 import facebookIcon from '../../media/facebook.svg'; // Import the Facebook icon
@@ -15,12 +15,15 @@ const HeaderContainer = styled.header`
   height: var(--nav-header-height);
 `;
 
-const HeaderBackground = styled.div`
+interface HeaderBackgroundProps {
+  headerCollapse: number;
+}
+
+const HeaderBackground = styled.div<HeaderBackgroundProps>`
   position: sticky;
   top: 0;
   width: 100%;
   height: var(--nav-header-height);
-  background: var(--shell-background);
   z-index: 1;
   margin-top: calc(-1 * var(--nav-header-height));
   margin-bottom: 2rem;
@@ -30,6 +33,14 @@ const HeaderBackground = styled.div`
   -webkit-backdrop-filter: blur( 9px );
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   border-top: none;
+
+  background: ${({ headerCollapse }) => (
+    headerCollapse < 100
+      ? `rgba( from var(--shell-background) r g b / calc(alpha + (1 - alpha) * ${(100 - headerCollapse) / 100}))`
+      : 'var(--shell-background)'
+  )};
+  
+  
 `;
 
 const NavContent = styled.div`
@@ -160,11 +171,40 @@ const RightSection = styled.div`
 interface HeaderProps {
   onNavigation: (page: { page: 'home' | 'about' | 'documents' }) => void;
   background?: boolean;
+  onHeaderCollapseChange?: (collapsePercentage: number) => void;
   children?: React.ReactNode;
 }
 
-const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigation, background, children, onHeaderCollapseChange }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const headerBackgroundRef = useRef<HTMLDivElement>(null);
+  const [headerCollapse, setHeaderCollapse] = useState(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (headerBackgroundRef.current) {
+        const headerTopRelativeToViewport = headerBackgroundRef.current.getBoundingClientRect().top;
+        const headerDistanceFromTopOfDocument = headerTopRelativeToViewport + window.scrollY;
+        const collapsePercentage = headerDistanceFromTopOfDocument !== 0 ? 100 - (headerTopRelativeToViewport / headerDistanceFromTopOfDocument) * 100 : 100;
+        setHeaderCollapse(prevCollapse => {
+          if (prevCollapse !== collapsePercentage && onHeaderCollapseChange) {
+            onHeaderCollapseChange(collapsePercentage);
+          }
+          return collapsePercentage;
+        });
+      }
+    }
+
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [onHeaderCollapseChange]);
+  
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, page: 'home' | 'about' | 'documents') => {
     e.preventDefault();
@@ -194,7 +234,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigation, background, children }) =
         </NavContent>
       </HeaderContainer>
       {children}
-      <HeaderBackground />
+      <HeaderBackground ref={headerBackgroundRef} headerCollapse={headerCollapse} />
       <DrawerContainer isOpen={isDrawerOpen}>
         <NavLinks onLinkClick={handleClick} />
         <DrawerContactUsContainer>

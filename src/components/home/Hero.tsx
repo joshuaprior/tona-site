@@ -35,7 +35,7 @@ const OverlayPath = styled.path<OverlayPathProps>`
   ${({ scale }) => scale === 100 ? '' : `
     transform-origin: bottom;
     transform: scale(1, ${scale / 100});
-    fill: rgb( from var(--shell-background) r g b / calc(alpha + ${0.2 * scale / 100}));
+    fill: rgb( from var(--shell-background) r g b / calc(alpha + (1 - alpha) * ${scale / 100}));
   `}
 `;
 
